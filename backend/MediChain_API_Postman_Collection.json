@@ -1,0 +1,2164 @@
+{
+	"info": {
+		"_postman_id": "d4e6f7cc-e301-4ab7-bfbf-4c2ae2cc788a",
+		"name": "MediChain API Copy",
+		"description": "MediChain API collection for testing the backend functionality",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38223285"
+	},
+	"item": [
+		{
+			"name": "Doctor API",
+			"item": [
+				{
+					"name": "Get Doctor Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{doctorToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/doctors/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"doctors",
+								"profile"
+							]
+						},
+						"description": "Get the logged-in doctor's profile information"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{doctorToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"specialization\": \"Cardiology\",\n    \"department\": \"Heart Center\",\n    \"experience\": 8,\n    \"bio\": \"Board certified cardiologist with 8 years of experience\",\n    \"languages\": [\"English\", \"Spanish\"],\n    \"workingHours\": {\n        \"monday\": [\"09:00-13:00\", \"14:00-17:00\"],\n        \"tuesday\": [\"09:00-13:00\", \"14:00-17:00\"],\n        \"wednesday\": [\"09:00-13:00\"]\n    },\n    \"consultationFees\": {\n        \"inPerson\": 150,\n        \"virtual\": 100\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/doctors/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"doctors",
+								"profile"
+							]
+						},
+						"description": "Update the doctor's professional profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctor's Patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{doctorToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/doctors/patients?page=1&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"doctors",
+								"patients"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get list of patients assigned to the doctor"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{doctorToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/doctors/patients/{{patientId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"doctors",
+								"patients",
+								"{{patientId}}"
+							]
+						},
+						"description": "Get detailed information about a specific patient"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{doctorToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/doctors/search/patients?term=john",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"doctors",
+								"search",
+								"patients"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "john"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Search for patients by name or other identifiers"
+					},
+					"response": []
+				}
+			],
+			"description": "APIs for doctor-specific functionality"
+		},
+		{
+			"name": "Wallet API",
+			"item": [
+				{
+					"name": "Get User Wallet",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/wallet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"wallet"
+							]
+						},
+						"description": "Get wallet information for the logged-in user"
+					},
+					"response": []
+				},
+				{
+					"name": "Connect Wallet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"walletAddress\": \"0x71C7656EC7ab88b098defB751B7401B5f6d8976F\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/wallet/connect",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"wallet",
+								"connect"
+							]
+						},
+						"description": "Connect a blockchain wallet to the user account"
+					},
+					"response": []
+				},
+				{
+					"name": "Disconnect Wallet",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/wallet/disconnect",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"wallet",
+								"disconnect"
+							]
+						},
+						"description": "Disconnect the wallet from the user account"
+					},
+					"response": []
+				}
+			],
+			"description": "APIs for blockchain wallet management"
+		},
+		{
+			"name": "Hospital Admin API",
+			"item": [
+				{
+					"name": "Get Hospital Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{hospitalAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/hospitals/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hospitals",
+								"profile"
+							]
+						},
+						"description": "Get the hospital profile information"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Hospital Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{hospitalAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"City General Hospital\",\n    \"address\": \"123 Healthcare Ave, New York, NY 10001\",\n    \"city\": \"New York\",\n    \"state\": \"NY\",\n    \"country\": \"United States\",\n    \"zipCode\": \"10001\",\n    \"phone\": \"+1-555-0123\",\n    \"email\": \"admin@citygeneral.com\",\n    \"website\": \"https://www.citygeneral.com\",\n    \"aiSettings\": {\n        \"summarizationEnabled\": true,\n        \"predictionEnabled\": false,\n        \"anonymizationLevel\": \"medium\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/hospitals/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hospitals",
+								"profile"
+							]
+						},
+						"description": "Update the hospital profile information"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hospital Doctors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{hospitalAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/hospitals/doctors?page=1&limit=10&department=cardiology",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hospitals",
+								"doctors"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "department",
+									"value": "cardiology"
+								}
+							]
+						},
+						"description": "Get all doctors in the hospital"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Doctor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{hospitalAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"new.doctor@hospital.com\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Smith\",\n    \"phone\": \"+1-555-0129\",\n    \"specialization\": \"Neurology\",\n    \"department\": \"Neuroscience\",\n    \"licenseNumber\": \"MD-2020-7890\",\n    \"experience\": 5,\n    \"temporaryPassword\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/hospitals/doctors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hospitals",
+								"doctors"
+							]
+						},
+						"description": "Add a new doctor to the hospital"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor Status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{hospitalAdminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"inactive\",\n    \"reason\": \"On extended leave\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/hospitals/doctors/{{doctorId}}/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hospitals",
+								"doctors",
+								"{{doctorId}}",
+								"status"
+							]
+						},
+						"description": "Update a doctor's status"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hospital Patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{hospitalAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/hospitals/patients?page=1&limit=10&doctorId={{doctorId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hospitals",
+								"patients"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "doctorId",
+									"value": "{{doctorId}}"
+								}
+							]
+						},
+						"description": "Get all patients in the hospital"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hospital Analytics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{hospitalAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/hospitals/analytics",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hospitals",
+								"analytics"
+							]
+						},
+						"description": "Get analytics for the hospital"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Billing Reports",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{hospitalAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/hospitals/billing-reports?startDate=2025-08-01&endDate=2025-09-01",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hospitals",
+								"billing-reports"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2025-08-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-09-01"
+								}
+							]
+						},
+						"description": "Get billing reports for the hospital"
+					},
+					"response": []
+				}
+			],
+			"description": "APIs for hospital administrators"
+		},
+		{
+			"name": "System Admin API",
+			"item": [
+				{
+					"name": "Get System Overview",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/overview",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"overview"
+							]
+						},
+						"description": "Get system overview with statistics"
+					},
+					"response": []
+				},
+				{
+					"name": "Register Hospital",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/hospitals",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"hospitals"
+							]
+						},
+						"description": "Get system overview with statistics"
+					},
+					"response": []
+				},
+				{
+					"name": "Approve Hospital Registration",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/hospitals",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"hospitals"
+							]
+						},
+						"description": "Get list of hospital registrations"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hospital Registrations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/hospitals",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"hospitals"
+							]
+						},
+						"description": "Get list of hospital registrations"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/users?role=doctor&status=active&page=1&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "doctor"
+								},
+								{
+									"key": "status",
+									"value": "active"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get list of users filtered by role and status"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"suspended\",\n    \"reason\": \"Violation of platform policy\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/users/{{userId}}/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"{{userId}}",
+								"status"
+							]
+						},
+						"description": "Update a user's status (active, suspended, deleted)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blockchain Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/blockchain/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"blockchain",
+								"status"
+							]
+						},
+						"description": "Get blockchain network status"
+					},
+					"response": []
+				},
+				{
+					"name": "Get System Logs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/system/logs?severity=error&startDate=2025-09-01&endDate=2025-09-02&limit=100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"system",
+								"logs"
+							],
+							"query": [
+								{
+									"key": "severity",
+									"value": "error"
+								},
+								{
+									"key": "startDate",
+									"value": "2025-09-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2025-09-02"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "Get system logs filtered by severity and date range"
+					},
+					"response": []
+				},
+				{
+					"name": "Update System Settings",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"maintenance\": {\n        \"enabled\": false,\n        \"message\": \"System maintenance scheduled for Sunday, 2am-4am EST\"\n    },\n    \"security\": {\n        \"maxLoginAttempts\": 5,\n        \"lockoutDurationMinutes\": 15,\n        \"passwordExpiryDays\": 90\n    },\n    \"ipfs\": {\n        \"primaryGateway\": \"https://ipfs.medichain.io\",\n        \"fallbackGateway\": \"https://ipfs.io\"\n    },\n    \"blockchain\": {\n        \"network\": \"mumbai\",\n        \"gasLimit\": 500000\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/system/settings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"system",
+								"settings"
+							]
+						},
+						"description": "Update system settings"
+					},
+					"response": []
+				},
+				{
+					"name": "Update System Settings Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"maintenance\": {\n        \"enabled\": false,\n        \"message\": \"System maintenance scheduled for Sunday, 2am-4am EST\"\n    },\n    \"security\": {\n        \"maxLoginAttempts\": 5,\n        \"lockoutDurationMinutes\": 15,\n        \"passwordExpiryDays\": 90\n    },\n    \"ipfs\": {\n        \"primaryGateway\": \"https://ipfs.medichain.io\",\n        \"fallbackGateway\": \"https://ipfs.io\"\n    },\n    \"blockchain\": {\n        \"network\": \"mumbai\",\n        \"gasLimit\": 500000\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/system/settings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"system",
+								"settings"
+							]
+						},
+						"description": "Update system settings"
+					},
+					"response": []
+				}
+			],
+			"description": "APIs for system administrators"
+		},
+		{
+			"name": "Appointments API",
+			"item": [
+				{
+					"name": "Schedule Appointment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"doctorId\": \"{{doctorId}}\",\n    \"hospitalId\": \"{{hospitalId}}\",\n    \"date\": \"2025-09-25T10:30:00.000Z\",\n    \"duration\": 30,\n    \"type\": \"in_person\",\n    \"reason\": \"Annual checkup\",\n    \"notes\": \"First time visit\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/appointments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appointments"
+							]
+						},
+						"description": "Create a new appointment"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient Appointments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{patientToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/appointments/patient?status=upcoming&page=1&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appointments",
+								"patient"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "upcoming"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get all appointments for the current patient"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctor Appointments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{doctorToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/appointments/doctor?date=2025-09-25&page=1&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appointments",
+								"doctor"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2025-09-25"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get all appointments for the current doctor"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Hospital Appointments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{hospitalAdminToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/appointments/hospital?date=2025-09-25&page=1&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appointments",
+								"hospital"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2025-09-25"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get all appointments for the hospital"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Appointment Status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"cancelled\",\n    \"reason\": \"Schedule conflict\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/appointments/:id/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appointments",
+								":id",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{appointmentId}}"
+								}
+							]
+						},
+						"description": "Update the status of an appointment"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctor Availability",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{userToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/appointments/availability/:doctorId?date=2025-09-25",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appointments",
+								"availability",
+								":doctorId"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2025-09-25"
+								}
+							],
+							"variable": [
+								{
+									"key": "doctorId",
+									"value": "{{doctorId}}"
+								}
+							]
+						},
+						"description": "Get a doctor's available appointment slots"
+					},
+					"response": []
+				}
+			],
+			"description": "APIs for managing appointments"
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"User created successfully\", function() {",
+									"    pm.expect(jsonData._id).to.exist;",
+									"    pm.expect(jsonData.email).to.exist;",
+									"    pm.expect(jsonData.role).to.equal('patient');",
+									"    pm.environment.set(\"patientId\", jsonData._id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"patient@example.com\",\n  \"password\": \"Password123!\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"role\": \"patient\",\n  \"walletAddress\": \"{{patientWalletAddress}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a new patient user"
+					},
+					"response": []
+				},
+				{
+					"name": "Register System Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"User created successfully\", function() {",
+									"    pm.expect(jsonData._id).to.exist;",
+									"    pm.expect(jsonData.email).to.exist;",
+									"    pm.expect(jsonData.role).to.equal('patient');",
+									"    pm.environment.set(\"patientId\", jsonData._id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"patient@example.com\",\n  \"password\": \"Password123!\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"role\": \"patient\",\n  \"walletAddress\": \"{{patientWalletAddress}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a new patient user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login as System Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Login successful\", function() {",
+									"    pm.expect(jsonData.access_token).to.exist;",
+									"    pm.environment.set(\"patientToken\", jsonData.access_token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"patient@example.com\",\n  \"password\": \"Password123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login as patient and get token"
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Hospital Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Login successful\", function() {",
+									"    pm.expect(jsonData.access_token).to.exist;",
+									"    pm.environment.set(\"patientToken\", jsonData.access_token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"patient@example.com\",\n  \"password\": \"Password123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login as patient and get token"
+					},
+					"response": []
+				},
+				{
+					"name": "Register Doctor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"User created successfully\", function() {",
+									"    pm.expect(jsonData._id).to.exist;",
+									"    pm.expect(jsonData.email).to.exist;",
+									"    pm.expect(jsonData.role).to.equal('doctor');",
+									"    pm.environment.set(\"doctorId\", jsonData._id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"doctor@example.com\",\n  \"password\": \"Password123!\",\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"role\": \"doctor\",\n  \"walletAddress\": \"{{doctorWalletAddress}}\",\n  \"hospitalId\": \"hospital123\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a new doctor user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Login successful\", function() {",
+									"    pm.expect(jsonData.access_token).to.exist;",
+									"    pm.environment.set(\"patientToken\", jsonData.access_token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"patient@example.com\",\n  \"password\": \"Password123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login as patient and get token"
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Doctor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Login successful\", function() {",
+									"    pm.expect(jsonData.access_token).to.exist;",
+									"    pm.environment.set(\"doctorToken\", jsonData.access_token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"doctor@example.com\",\n  \"password\": \"Password123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login as doctor and get token"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Profile returned successfully\", function() {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData._id).to.exist;",
+									"    pm.expect(jsonData.email).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{patientToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						},
+						"description": "Get the current user's profile"
+					},
+					"response": []
+				}
+			],
+			"description": "Authentication related endpoints"
+		},
+		{
+			"name": "Medical Records",
+			"item": [
+				{
+					"name": "Upload Medical Record",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Record created successfully\", function() {",
+									"    pm.expect(jsonData._id).to.exist;",
+									"    pm.expect(jsonData.ipfsHash).to.exist;",
+									"    pm.expect(jsonData.blockchainTxHash).to.exist;",
+									"    pm.environment.set(\"recordId\", jsonData._id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{patientToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Blood Test Results",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Annual checkup blood work",
+									"type": "text"
+								},
+								{
+									"key": "recordType",
+									"value": "lab_result",
+									"type": "text"
+								},
+								{
+									"key": "recordDate",
+									"value": "2023-08-30",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/path/to/sample-file.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/medical-records",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"medical-records"
+							]
+						},
+						"description": "Upload a new medical record"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient Records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Records returned successfully\", function() {",
+									"    pm.expect(jsonData).to.be.an('array');",
+									"    if (jsonData.length > 0) {",
+									"        pm.environment.set(\"recordId\", jsonData[0]._id);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{patientToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/medical-records",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"medical-records"
+							]
+						},
+						"description": "Get all medical records for the current patient"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Record by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Record returned successfully\", function() {",
+									"    pm.expect(jsonData._id).to.equal(pm.environment.get(\"recordId\"));",
+									"    pm.expect(jsonData.ipfsHash).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{patientToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/medical-records/{{recordId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"medical-records",
+								"{{recordId}}"
+							]
+						},
+						"description": "Get a specific medical record by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Download Record File",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"File downloaded successfully\", function() {",
+									"    pm.expect(pm.response.size()).to.be.above(0);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{patientToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/medical-records/{{recordId}}/file",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"medical-records",
+								"{{recordId}}",
+								"file"
+							]
+						},
+						"description": "Download the medical record file"
+					},
+					"response": []
+				},
+				{
+					"name": "Share Record with Doctor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Access granted successfully\", function() {",
+									"    pm.expect(jsonData.success).to.be.true;",
+									"    pm.expect(jsonData.transactionHash).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{patientToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userToShareWithId\": \"{{doctorId}}\",\n  \"userToShareWithAddress\": \"{{doctorWalletAddress}}\",\n  \"expirationTime\": 1693411200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/medical-records/{{recordId}}/share",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"medical-records",
+								"{{recordId}}",
+								"share"
+							]
+						},
+						"description": "Share a record with a doctor"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctor's Accessible Records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Shared records accessible\", function() {",
+									"    pm.expect(jsonData).to.be.an('array');",
+									"    const hasAccess = jsonData.some(record => record._id === pm.environment.get(\"recordId\"));",
+									"    pm.expect(hasAccess).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{doctorToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/medical-records",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"medical-records"
+							]
+						},
+						"description": "Get all records the doctor has access to"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Record Integrity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Record verified successfully\", function() {",
+									"    pm.expect(jsonData.isVerified).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{doctorToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/medical-records/{{recordId}}/verify",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"medical-records",
+								"{{recordId}}",
+								"verify"
+							]
+						},
+						"description": "Verify the integrity of a medical record"
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke Doctor's Access",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Access revoked successfully\", function() {",
+									"    pm.expect(jsonData.success).to.be.true;",
+									"    pm.expect(jsonData.transactionHash).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{patientToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userToRevokeId\": \"{{doctorId}}\",\n  \"userToRevokeAddress\": \"{{doctorWalletAddress}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/medical-records/{{recordId}}/revoke",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"medical-records",
+								"{{recordId}}",
+								"revoke"
+							]
+						},
+						"description": "Revoke a doctor's access to a record"
+					},
+					"response": []
+				}
+			],
+			"description": "Medical record management endpoints"
+		},
+		{
+			"name": "Access Logs",
+			"item": [
+				{
+					"name": "Get Record Access Logs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Access logs returned\", function() {",
+									"    pm.expect(jsonData).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{patientToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/medical-records/{{recordId}}/access-logs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"medical-records",
+								"{{recordId}}",
+								"access-logs"
+							]
+						},
+						"description": "Get access logs for a specific medical record"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Access Logs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Access logs returned\", function() {",
+									"    pm.expect(jsonData).to.be.an('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{patientToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/me/access-logs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"me",
+								"access-logs"
+							]
+						},
+						"description": "Get all access logs for the current user's records"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for auditing record access"
+		},
+		{
+			"name": "Blockchain Test",
+			"item": [
+				{
+					"name": "Test Blockchain Connection",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Blockchain connection successful\", function() {",
+									"    pm.expect(jsonData.status).to.equal('connected');",
+									"    pm.expect(jsonData.contractAddress).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/blockchain-test/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"blockchain-test",
+								"status"
+							]
+						},
+						"description": "Test the blockchain connection"
+					},
+					"response": []
+				},
+				{
+					"name": "Test Blockchain Storage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Blockchain storage successful\", function() {",
+									"    pm.expect(jsonData.success).to.be.true;",
+									"    pm.expect(jsonData.transactionHash).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"patientAddress\": \"{{patientWalletAddress}}\",\n  \"recordId\": \"test-record-123\",\n  \"ipfsHash\": \"QmTestIPFSHash\",\n  \"contentHash\": \"0x1234567890abcdef\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/blockchain-test/test-store",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"blockchain-test",
+								"test-store"
+							]
+						},
+						"description": "Test storing a record on blockchain"
+					},
+					"response": []
+				}
+			],
+			"description": "Testing blockchain integration"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3001/api",
+			"type": "string"
+		},
+		{
+			"key": "patientWalletAddress",
+			"value": "0x123YourPatientWalletAddress",
+			"type": "string"
+		},
+		{
+			"key": "doctorWalletAddress",
+			"value": "0x456YourDoctorWalletAddress",
+			"type": "string"
+		},
+		{
+			"key": "patientToken",
+			"value": "your-patient-jwt-token-here",
+			"type": "string"
+		},
+		{
+			"key": "doctorToken",
+			"value": "your-doctor-jwt-token-here",
+			"type": "string"
+		},
+		{
+			"key": "userToken",
+			"value": "your-current-user-jwt-token-here",
+			"type": "string"
+		},
+		{
+			"key": "hospitalAdminToken",
+			"value": "your-hospital-admin-jwt-token-here",
+			"type": "string"
+		},
+		{
+			"key": "adminToken",
+			"value": "your-system-admin-jwt-token-here",
+			"type": "string"
+		}
+	]
+}
